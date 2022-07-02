@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+        <script>
+
+            window.addEventListener("load",(event) => {
+                if(window.ethereum){
+                    // https://docs.metamask.io/guide/rpc-api.html#permissions
+                    ethereum.request({method:'eth_requestAccounts'}).then(function(res){
+                        var sender = res[0];
+                        document.getElementById("sender").innerHTML = sender;
+                        window.web3 = new Web3(window.ethereum);
+                        document.getElementById("sender").innerHTML = sender;
+                        
+                        window.ethereum.on('accountsChanged', function (accounts) {
+                            sender = accounts[0];
+                            document.getElementById("sender").innerHTML = sender;
+                        });
+                        
+                        document.getElementById("sendButton").addEventListener("click", (e) => {
+                            var amount    = document.getElementById("amount").value; // Mit "." z. B. 1.4 als String
+                            var recipient = document.getElementById("recipient").value;
+                                      
+                            document.getElementById("sender").innerHTML = sender;
+                            var parameter = [{
+                                "from": accounts[0], 
+                                "to": recipient, 
+                                "value": web3.utils.toHex(web3.utils.toWei(amount, "ether")),
+                                "data": ""
+                            }];
+     
+                            ethereum.request({method:"eth_sendTransaction", params: parameter}).then(function(tx){
+                                document.getElementById("transaction").innerHTML = tx;
+                            });
+                        });
+                     });
+                }else{
+                    return false;
+                }
+            })
+        </script>
+    </head>
+        <body>
+            <h1>My First Dapp</h1>
+            <label for = "text">Betrag in ETH: </label>
+            <input type = "text" id = "amount">
+            <br>
+            <label for = "text">Empfänger: (Account 2)</label>
+            <input type = "text" id = "recipient">
+            <br>
+            <div>Sender: </div>
+            <div id = "sender"></div>
+            <br>
+            <button type = "button" id = "sendButton">Senden</button>
+            <br>
+            <div>Transaction-Hash: </div>
+            <div id = "transaction"></div>
+        </body>
+</html>
+
+
