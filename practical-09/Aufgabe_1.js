@@ -1,9 +1,3 @@
-/*
-Aufrufem im Terminal mit
-node Aufgabe_1.js
-*/
-
-//Before:
 //npm install web3
 
 //Web3 Library

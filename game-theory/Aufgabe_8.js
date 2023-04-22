@@ -1,8 +1,3 @@
-/*
-Aufrufem im Terminal mit
-node Aufgabe_8.js
-*/
-
 //Crypto Library
 const crypto = require('crypto');
 
