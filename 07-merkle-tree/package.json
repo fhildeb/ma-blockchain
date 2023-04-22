@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "merkletree": "^1.5.0"
+  }
+}
