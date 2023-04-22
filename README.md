@@ -37,7 +37,7 @@ This blockchain course provided an in-depth understanding of the fundamental con
 
 ## Repository Contents
 
-7.
+7. Merkle Tree Verification
 8.
 9.
 10.
