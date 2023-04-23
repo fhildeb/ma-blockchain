@@ -41,7 +41,7 @@
                   document.getElementById("sender").innerHTML = sender;
                   var parameter = [
                     {
-                      from: accounts[0],
+                      from: sender,
                       to: recipient,
                       value: web3.utils.toHex(
                         web3.utils.toWei(amount, "ether")
