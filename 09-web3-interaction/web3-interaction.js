@@ -3,35 +3,35 @@
 //Web3 Library
 Web3JS = require('web3');
 
-//Addresse
-web3 = new Web3JS('https://ropsten.infura.io/v3/9a801a369ed247dfb3c9f0079a894e5b');
+//Address
+web3 = new Web3JS('https://goerli.infura.io/v3/<infura-key>');
 
 /*
-Deklarieren von asynchronen Funktionen, damit mit der
-gesamten Ausgabe gewartet wird, bis Informationen von
-der Blockchain abgerufen wurden
+Declare asynchronous functions so that
+the entire output will wait until information from
+the blockchain has been retrieved
 */
 
-//Blocknummer ausgeben
+//Output block number
 async function getBlockNumber(){
   number = await web3.eth.getBlockNumber();
-  console.log("Aktuelle Blocknummer:");
+  console.log("Current block number:");
   console.log(number);
   console.log("");
 }
 
-//Version des Clients ausgeben
+//Output client version
 async function getClientVersion(){
   client = await web3.eth.getNodeInfo();
-  console.log("Version des Clients:");
+  console.log("Client version:");
   console.log(client);
   console.log("");
 }
 
-//ID des Netzwerks abrufen
+//Get network ID
 async function getNetwork(){
   net = await web3.eth.net.getId();
-  console.log("Verbundenes Netzwerk     :  " + net);
+  console.log("Connected network     :  " + net);
   console.log("-----------Agenda------------");
   console.log("Mainnet              = ID:  1");
   console.log("Classic  Testnet PoW = ID:  2");
@@ -41,15 +41,15 @@ async function getNetwork(){
   console.log("");
 }
 
-//Aktuellen Gaspreis aufrufen
+//Get current gas price
 async function getGasPrice(){
   price = await web3.eth.getGasPrice();
-  console.log("Aktueller Gaspreis in Wei:");
+  console.log("Current gas price in Wei:");
   console.log(price);
   console.log("");
 }
 
-//Block 1 abrufen
+//Get block 1
 async function getGenesisHash(){
   genesis = await web3.eth.getBlock('genesis');
   console.log("Genesis Block Hash:");
@@ -57,71 +57,70 @@ async function getGenesisHash(){
   console.log("");
 }
 
-//Aktuelles Gaslimit im Block abrufen
+//Get current gas limit in block
 async function getGasLimit(){
   block = await web3.eth.getBlock('latest');
-  console.log("Aktuelles Gaslimit des letzten Blocks:");
+  console.log("Current gas limit of the last block:");
   console.log(block.gasLimit);
   console.log("");
 }
 
-//Ether einer Adresse abrufen
+//Get Ether from an address
 async function getEthFromAddress(){
   ether = await web3.eth.getBalance('0x9e3d69305Da51f34eE29BfB52721e3A824d59e69');
-  console.log("Aktuelles Guthaben auf Adresse");
+  console.log("Current balance on address");
   console.log("0x9e3d69305Da51f34eE29BfB52721e3A824d59e69");
-  console.log("sind " + ether + " Ether.");
+  console.log("is " + ether + " Ether.");
   console.log("");
 }
 
-//Transaktionszahl eines Blocks abrufen
+//Get the number of transactions in a block
 async function getTxCountFromBlock(){
   tx = await web3.eth.getBlockTransactionCount('0xaab2e5e0967efae40975e6110d92e75e15719cfa065a47825bd173d95bcc9b53');
-  console.log("Im Block ");
+  console.log("In block ");
   console.log("0xaab2e5e0967efae40975e6110d92e75e15719cfa065a47825bd173d95bcc9b53:");
-  console.log("sind insgesamt " + tx + " Transaktionen");
+  console.log("there are a total of " + tx + " transactions");
   console.log("");
 }
 
-//Transaktionsinformationen abrufen
+//Get transaction information
 async function getTransaction(){
   receipt = await web3.eth.getTransaction('0x4f080a4965d74e38a05c809708724e8d596ab9576c89e55090a9e1445b743075');
-  console.log("In der Transaktion mit dem Hash");
+  console.log("In the transaction with the hash");
   console.log("0x4f080a4965d74e38a05c809708724e8d596ab9576c89e55090a9e1445b743075:");
-  console.log("wurden von der Adresse " + receipt.from);
-  console.log( receipt.value + " Wei zu " + receipt.to)
-  console.log("gesendet.")
+  console.log(receipt.value + "were sent from the address " + receipt.from);
+  console.log("to address " + receipt.to)
   console.log("");
 }
 
 /*
-Lokale Funktionen, deren Antwort
-direkt nach der Verarbeitung und
-Berechnung ausgegeben werden kann
+Local functions whose response
+can be output directly after processing and
+calculation
 */
 
-//Web3 Version checken
+//Check Web3 version
 console.log("");
 console.log("Web3 Version:");
 console.log(web3.version);
 console.log("");
 
-//Hash berechnen
-console.log("SHA3 Hash von Hallo Welt:");
-console.log(web3.utils.sha3("Hallo Welt"));
+//Calculate hash
+console.log("SHA3 Hash of Hello World:");
+console.log(web3.utils.sha3("Hello World"));
 console.log("");
 
-//Betrag zu Wei wandeln
-console.log("Wie viele Wei sind 3 Shannon?");
+//Convert amount to Wei
+console.log("How many Wei are 3 Shannon?");
 console.log(web3.utils.toWei('3', 'shannon'));
 console.log("");
 
-//Betrag von Wei wandeln
-console.log("Wie viele Finney sind 1500000000000000 Wei?");
+//Convert amount from Wei
+console.log("How many Finney are 1500000000000000 Wei?");
 console.log(web3.utils.fromWei('1500000000000000', 'finney'));
 console.log("");
 
-//Asynchrone Funktionen ausführen
+//Execute asynchronous functions
 getBlockNumber();
 getClientVersion();
 getNetwork();
