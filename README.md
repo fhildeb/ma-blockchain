@@ -43,8 +43,12 @@ This blockchain course provided an in-depth understanding of the fundamental con
 8. Basic Solidity Contract
 9. Ethereum Interactions
 10. ERC20 Implementation
-11.
-12.
+11. Solidity Programming Techniques
+12. CND Ethereum dApps
+    - Addition Math Contract
+    - Eth Info Stat Page
+    - Transaction Page
+    - Text Writing
 
 ## Tools
 
