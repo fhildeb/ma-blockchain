@@ -41,8 +41,8 @@ This blockchain course provided an in-depth understanding of the fundamental con
 6. Address Balance Search
 7. Merkle Tree Verification
 8. Basic Solidity Contract
-9.
-10.
+9. Ethereum Interactions
+10. ERC20 Implementation
 11.
 12.
 
