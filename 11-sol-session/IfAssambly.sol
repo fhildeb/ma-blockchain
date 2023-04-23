@@ -1,9 +1,9 @@
 pragma solidity ^0.8.0;
 
-contract If_Assambly{
+contract IfAssambly{
 
-  //Falls Variable v1 großer 5, angegebene Variablen subtrahieren
-  //sonst Addition
+  // If variable v1 is greater than 5, subtract the given variables
+  // otherwise addition
   function inlineCalc(uint v1, uint v2) public pure returns(uint result){
     assembly{
         if gt(v1, 5) {

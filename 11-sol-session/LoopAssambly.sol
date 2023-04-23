@@ -1,15 +1,15 @@
 pragma solidity ^0.8.0;
 
-contract If_Assambly{
+contract LoopAssambly{
 
-  //Ergebnis in Schleife veroeffentlichen
+  // Publish result in loop
   function loopFunc() public pure returns(uint result){
     assembly{
 
-      //Variable i gleich Null
-      //Solange Variable i kleiner 10
-      //Variable i mit 2 multiplizieren
-      //Letztes Ergebnis wird ausgegeben (18)
+      // Variable i equals zero
+      // As long as variable i is less than 10
+      // Multiply variable i by 2
+      // Last result is output (18)
       for { let i := 0 }
           lt(i, 10)
           { i := add(i, 1) }
