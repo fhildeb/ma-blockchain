@@ -1,12 +1,43 @@
 [
   {
     "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_text",
+        "type": "string"
+      }
+    ],
+    "name": "writeText",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "counter",
     "outputs": [
       {
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address payable",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -36,19 +67,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "_text",
-        "type": "string"
-      }
-    ],
-    "name": "writeText",
-    "outputs": [],
-    "stateMutability": "payable",
     "type": "function"
   }
 ]
