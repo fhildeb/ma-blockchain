@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+    />
+    <!-- web3.js is a conveniance library that wraps the RPC calls -->
+
+    <script>
+      // Must be delivered by a server, otherwise MetaMask will not respond.
+      // Opt in: https://docs.metamask.io/guide/rpc-api.html#permissions
+
+      window.addEventListener("load", (event) => {
+        if (window.ethereum) {
+          ethereum
+            .request({ method: "eth_requestAccounts" })
+            .then(function (res) {
+              console.log(res);
+
+              ethereum
+                .request({ method: "eth_blockNumber", params: [] })
+                .then(function (blknr) {
+                  console.log(parseInt(blknr));
+                  document.getElementById("blocknumber").innerHTML =
+                    parseInt(blknr);
+                });
+
+              ethereum
+                .request({
+                  method: "eth_getBalance",
+                  //TODO: Address
+                  params: ["0x87E01F75d7aC18D6afeBA63192B6CBeB391a57A8"],
+                })
+                .then(function (balance) {
+                  console.log(balance);
+                  var balanceInEther = web3.utils.fromWei(balance, "ether");
+                  console.log(balanceInEther);
+                  document.getElementById("balance").innerHTML =
+                    balanceInEther + " ETH";
+                });
+
+              // Alternative method using web3.js
+              window.web3 = new Web3(window.ethereum);
+              web3.eth.getBlock(500000).then(function (block) {
+                console.log(block);
+                var blockStringified = JSON.stringify(block, null, 2); // Pretty print the JSON object
+                document.getElementById("block").innerHTML =
+                  "<pre>" + blockStringified + "</pre>";
+              });
+
+              document
+                .getElementById("toggleButton")
+                .addEventListener("click", function () {
+                  var blockElement = document.getElementById("block");
+                  if (blockElement.style.display === "none") {
+                    blockElement.style.display = "block";
+                  } else {
+                    blockElement.style.display = "none";
+                  }
+                });
+
+              web3.eth
+                .getTransaction(
+                  //TODO: TX Hash
+                  "0x9b01afa70e62464b30834e9b6c225475f2a719ae737eace8004ecec6b16ab28e"
+                )
+                .then(function (transaction) {
+                  console.log(transaction);
+                  document.getElementById("transaction").innerHTML =
+                    transaction.gas;
+                });
+            });
+        } else {
+          return false;
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="margin-top: 15px">Ethereum Information dApp</h1>
+      <div>Blocknumber:</div>
+      <div id="blocknumber"></div>
+      <br />
+      <div>Balance:</div>
+      <div id="balance"></div>
+      <br />
+      <div>Transaction:</div>
+      <div id="transaction"></div>
+      <br />
+      <div>Block:</div>
+      <button type="button" id="toggleButton">Toggle Block Keys</button>
+      <div id="block" style="display: none"></div>
+    </div>
+  </body>
+</html>
