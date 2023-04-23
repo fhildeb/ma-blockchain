@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+    />
+    <!-- web3.js is a convenience library that wraps the RPC calls -->
+
+    <script>
+      // Interaction with a smart contract
+
+      // We use the web3.js library. This is a bit easier to use than the RPC calls.
+
+      // Must be delivered by a server, otherwise MetaMask will not respond.
+      // Opt in: https://docs.metamask.io/guide/rpc-api.html#permissions
+
+      window.addEventListener("load", (event) => {
+        if (window.ethereum) {
+          ethereum
+            .request({ method: "eth_requestAccounts" })
+            .then(function (res) {
+              console.log(res);
+              window.web3 = new Web3(window.ethereum);
+
+              var abi = [
+                {
+                  inputs: [
+                    {
+                      internalType: "uint256",
+                      name: "_a",
+                      type: "uint256",
+                    },
+                    {
+                      internalType: "uint256",
+                      name: "_b",
+                      type: "uint256",
+                    },
+                  ],
+                  name: "adding",
+                  outputs: [],
+                  stateMutability: "nonpayable",
+                  type: "function",
+                },
+                {
+                  inputs: [],
+                  name: "result",
+                  outputs: [
+                    {
+                      internalType: "uint256",
+                      name: "",
+                      type: "uint256",
+                    },
+                  ],
+                  stateMutability: "view",
+                  type: "function",
+                },
+              ];
+
+              document
+                .getElementById("writeButton")
+                .addEventListener("click", () => {
+                  console.log("Click");
+                  var number1 = document.getElementById("number1").value;
+                  var number2 = document.getElementById("number2").value;
+                  console.log(number1 + " " + number2);
+                  var contract = new web3.eth.Contract(
+                    abi,
+                    "0x4e8928C63d471702d593B0107FCdC48D31764138"
+                  ); //TODO: Add Contract Goerli
+
+                  //Goerli
+                  contract.methods
+                    .adding(number1, number2)
+                    .send({
+                      from: "0x87E01F75d7aC18D6afeBA63192B6CBeB391a57A8",
+                      // TODO: Account Address
+                    })
+                    .then(function (res) {
+                      var transaction = res.transactionHash;
+                      var blockhash = res.blockHash;
+                      console.log(transaction);
+                      document.getElementById("transaction").innerHTML =
+                        transaction;
+                      document.getElementById("blockhash").innerHTML =
+                        blockhash;
+                    });
+                });
+            });
+        } else {
+          return false;
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="margin-top: 15px">Addition dApp</h1>
+      <label for="text">Number 1: </label>
+      <input type="text" id="number1" />
+      <br />
+      <label for="text">Number 2: </label>
+      <input type="text" id="number2" />
+      <br />
+      <button type="button" id="writeButton">Add</button>
+      <br />
+      <div>Blockhash:</div>
+      <div id="blockhash"></div>
+      <br />
+      <div>TX-Hash:</div>
+      <div id="transaction"></div>
+    </div>
+  </body>
+</html>
