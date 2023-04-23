@@ -1,6 +1,6 @@
 pragma solidity ^0.7.5;
 
-contract lesson01{
+contract BasicContract{
     string public name;
 
     constructor(){

@@ -37,9 +37,15 @@ This blockchain course provided an in-depth understanding of the fundamental con
 
 ## Repository Contents
 
+5. Hashing Script
+6. Address Balance Search
 7. Merkle Tree Verification
-8.
+8. Basic Solidity Contract
 9.
 10.
 11.
 12.
+
+## Tools
+
+- [Remix IDE](https://remix.ethereum.org/)
