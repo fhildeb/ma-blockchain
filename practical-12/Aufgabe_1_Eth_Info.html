@@ -1,63 +1,73 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-        <!-- web3.js is eine Conveniance-Library, die die RPC-Aufrufe wrappt -->
-        
-        <script>
-            
-            // Muss von einem Server ausgeliefert werden, sonst reagiert MetaMask nicht.
-            // Opt in: https://docs.metamask.io/guide/rpc-api.html#permissions
-          
-            window.addEventListener("load",(event) => {
-                if(window.ethereum){
-                    ethereum.request({method:'eth_requestAccounts'}).then(function(res){
-                        console.log(res);
-                        
-                        ethereum.request({method: "eth_blockNumber", params: []}).then(function(blknr){
-                            console.log(parseInt(blknr));
-                            document.getElementById("blocknumber").innerHTML = parseInt(blknr);
-                        });
-                       
-                        ethereum.request({method: "eth_getBalance", params: ["0xBc6b2C1c358EcA7AA07e61954060584f382DDA81"]}).then(function(balance){
-                            console.log(balance);
-                            document.getElementById("balance").innerHTML = balance;
-                        });
-                        
-                        // Alternative Methode mittels web3.js
-                        window.web3 = new Web3(window.ethereum);
-                        web3.eth.getBlock(500000).then(function(block){
-                            console.log(block);
-                            document.getElementById("block").innerHTML = block;
-                        })
-                        
-                        web3.eth.getTransaction("0x013aa823a7a80754b1676ee826c89de9a6afd629a3c4426e1fe3919aae11ede1").then(function(transaction){
-                            console.log(transaction);
-                            document.getElementById("transaction").innerHTML = transaction.gas;
-                        })
-                    });
-                }else{
-                    return false;
-                }
-            })
-            
-        </script>
-    </head>
-        <body>
-        
-            <h1>My First Dapp</h1>
-            <div>Blocknummer: </div>
-            <div id = "blocknumber"></div>
-            <br>
-            <div>Balance: </div>
-            <div id = "balance"></div>
-            <br>
-            <div>Block:</div>
-            <div id = "block" ></div>
-            <br>
-            <div>Transaction:</div>
-            <div id = "transaction" ></div>
-        </body>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <!-- web3.js is eine Conveniance-Library, die die RPC-Aufrufe wrappt -->
+
+    <script>
+      // Muss von einem Server ausgeliefert werden, sonst reagiert MetaMask nicht.
+      // Opt in: https://docs.metamask.io/guide/rpc-api.html#permissions
+
+      window.addEventListener("load", (event) => {
+        if (window.ethereum) {
+          ethereum
+            .request({ method: "eth_requestAccounts" })
+            .then(function (res) {
+              console.log(res);
+
+              ethereum
+                .request({ method: "eth_blockNumber", params: [] })
+                .then(function (blknr) {
+                  console.log(parseInt(blknr));
+                  document.getElementById("blocknumber").innerHTML =
+                    parseInt(blknr);
+                });
+
+              ethereum
+                .request({
+                  method: "eth_getBalance",
+                  params: ["0xBc6b2C1c358EcA7AA07e61954060584f382DDA81"],
+                })
+                .then(function (balance) {
+                  console.log(balance);
+                  document.getElementById("balance").innerHTML = balance;
+                });
+
+              // Alternative Methode mittels web3.js
+              window.web3 = new Web3(window.ethereum);
+              web3.eth.getBlock(500000).then(function (block) {
+                console.log(block);
+                document.getElementById("block").innerHTML = block;
+              });
+
+              web3.eth
+                .getTransaction(
+                  "0x013aa823a7a80754b1676ee826c89de9a6afd629a3c4426e1fe3919aae11ede1"
+                )
+                .then(function (transaction) {
+                  console.log(transaction);
+                  document.getElementById("transaction").innerHTML =
+                    transaction.gas;
+                });
+            });
+        } else {
+          return false;
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <h1>My First Dapp</h1>
+    <div>Blocknummer:</div>
+    <div id="blocknumber"></div>
+    <br />
+    <div>Balance:</div>
+    <div id="balance"></div>
+    <br />
+    <div>Block:</div>
+    <div id="block"></div>
+    <br />
+    <div>Transaction:</div>
+    <div id="transaction"></div>
+  </body>
 </html>
-
-

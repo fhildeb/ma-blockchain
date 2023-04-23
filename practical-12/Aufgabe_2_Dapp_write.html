@@ -1,115 +1,120 @@
-
-
 <!DOCTYPE html>
 
 <html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <!-- web3.js is eine Conveniance-Library, die die RPC-Aufrufe wrappt -->
 
-    <head>
-        <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-        <!-- web3.js is eine Conveniance-Library, die die RPC-Aufrufe wrappt -->
+    <script>
+      // Interaktion mit einem Smart Contract
+      // Wir nutzen die web3.js-Bibliothek. Diese ist etwas einfacher zu bedienen als die RPC-Calls.
+      //  https://web3js.readthedocs.io/en/v1.2.11/web3-eth-contract.html
 
-        <script>
-            // Interaktion mit einem Smart Contract
-            // Wir nutzen die web3.js-Bibliothek. Diese ist etwas einfacher zu bedienen als die RPC-Calls.
-            //  https://web3js.readthedocs.io/en/v1.2.11/web3-eth-contract.html
+      window.addEventListener("load", (event) => {
+        if (window.ethereum) {
+          contractAddress = "0x4d90985A71980d83C7fcdBC00D3527aF17540f4c"; //Rposten
+          sender = "0xFB010D3F1282629a4E9Ef51A355D6AD7B4e2979e"; //Ropsten
+          ethereum
+            .request({ method: "eth_requestAccounts" })
+            .then(function (res) {
+              console.log(res);
+              window.web3 = new Web3(window.ethereum);
 
-            window.addEventListener("load",(event) => {
-                if(window.ethereum){
-                    contractAddress = "0x4d90985A71980d83C7fcdBC00D3527aF17540f4c"; //Rposten
-                    sender = "0xFB010D3F1282629a4E9Ef51A355D6AD7B4e2979e"; //Ropsten
-                    ethereum.request({method:'eth_requestAccounts'}).then(function(res){
-                        console.log(res);
-                        window.web3 = new Web3(window.ethereum);
+              var abi = [
+                {
+                  inputs: [],
+                  name: "counter",
+                  outputs: [
+                    {
+                      internalType: "uint256",
+                      name: "",
+                      type: "uint256",
+                    },
+                  ],
+                  stateMutability: "view",
+                  type: "function",
+                },
+                {
+                  inputs: [],
+                  name: "price",
+                  outputs: [
+                    {
+                      internalType: "uint256",
+                      name: "",
+                      type: "uint256",
+                    },
+                  ],
+                  stateMutability: "view",
+                  type: "function",
+                },
+                {
+                  inputs: [],
+                  name: "text",
+                  outputs: [
+                    {
+                      internalType: "string",
+                      name: "",
+                      type: "string",
+                    },
+                  ],
+                  stateMutability: "view",
+                  type: "function",
+                },
+                {
+                  inputs: [
+                    {
+                      internalType: "string",
+                      name: "_text",
+                      type: "string",
+                    },
+                  ],
+                  name: "writeText",
+                  outputs: [],
+                  stateMutability: "payable",
+                  type: "function",
+                },
+              ];
 
-                        var abi = [
-                        	{
-                        		"inputs": [],
-                        		"name": "counter",
-                        		"outputs": [
-                        			{
-                        				"internalType": "uint256",
-                        				"name": "",
-                        				"type": "uint256"
-                        			}
-                        		],
-                        		"stateMutability": "view",
-                        		"type": "function"
-                        	},
-                        	{
-                        		"inputs": [],
-                        		"name": "price",
-                        		"outputs": [
-                        			{
-                        				"internalType": "uint256",
-                        				"name": "",
-                        				"type": "uint256"
-                        			}
-                        		],
-                        		"stateMutability": "view",
-                        		"type": "function"
-                        	},
-                        	{
-                        		"inputs": [],
-                        		"name": "text",
-                        		"outputs": [
-                        			{
-                        				"internalType": "string",
-                        				"name": "",
-                        				"type": "string"
-                        			}
-                        		],
-                        		"stateMutability": "view",
-                        		"type": "function"
-                        	},
-                        	{
-                        		"inputs": [
-                        			{
-                        				"internalType": "string",
-                        				"name": "_text",
-                        				"type": "string"
-                        			}
-                        		],
-                        		"name": "writeText",
-                        		"outputs": [],
-                        		"stateMutability": "payable",
-                        		"type": "function"
-                        	}
-                        ]
+              document
+                .getElementById("writeButton")
+                .addEventListener("click", () => {
+                  console.log("Klick");
+                  var text = document.getElementById("text").value;
+                  console.log(text);
+                  var contract = new web3.eth.Contract(abi, contractAddress); // Erstellen eines Contract-Objektes. Dazu benötigt man das ABI und die Contract-Adresse
 
-                        document.getElementById("writeButton").addEventListener("click",()=>{
-                            console.log("Klick");
-                            var text = document.getElementById("text").value;
-                            console.log(text);
-                            var contract = new web3.eth.Contract(abi , contractAddress); // Erstellen eines Contract-Objektes. Dazu benötigt man das ABI und die Contract-Adresse
-
-                            contract.methods.writeText("Hello").send({from:sender}).then(function(res){ // Aufruf der Contract-Methode "writeText"
-                                var transaction = res.transactionHash;
-                                var blockhash   = res.blockHash;
-                                console.log(transaction);
-                                document.getElementById("transaction").innerHTML = transaction;
-                                document.getElementById("blockhash").innerHTML = blockhash;
-                            });
-                        })
+                  contract.methods
+                    .writeText("Hello")
+                    .send({ from: sender })
+                    .then(function (res) {
+                      // Aufruf der Contract-Methode "writeText"
+                      var transaction = res.transactionHash;
+                      var blockhash = res.blockHash;
+                      console.log(transaction);
+                      document.getElementById("transaction").innerHTML =
+                        transaction;
+                      document.getElementById("blockhash").innerHTML =
+                        blockhash;
                     });
-                }else{
-                    return false;
-                }
-            })
-
-        </script>
-    </head>
-        <body>
-            <h1>My First Dapp</h1>
-            <label for = "text">Text: </label>
-            <input type = "text" id = "text">
-            <br>
-            <button type = "button" id = "writeButton">In Smart Contract schreiben</button>
-            <br>
-            <div>Blockhash: </div>
-            <div id = "blockhash"></div>
-            <br>
-            <div>TX-Hash: </div>
-            <div id = "transaction"></div>
-
-        </body>
+                });
+            });
+        } else {
+          return false;
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <h1>My First Dapp</h1>
+    <label for="text">Text: </label>
+    <input type="text" id="text" />
+    <br />
+    <button type="button" id="writeButton">In Smart Contract schreiben</button>
+    <br />
+    <div>Blockhash:</div>
+    <div id="blockhash"></div>
+    <br />
+    <div>TX-Hash:</div>
+    <div id="transaction"></div>
+  </body>
 </html>
