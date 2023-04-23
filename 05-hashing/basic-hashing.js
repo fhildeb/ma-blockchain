@@ -1,18 +1,15 @@
 //Crypto Library
 const crypto = require('crypto');
 
-//Aufgabe 3.0
 console.log("");
-console.log("Mögliche Hash-Funktionen:");
+console.log("Available hash functions:");
 console.log(crypto.getHashes());
 
-//Aufgabe 3.1
 console.log("");
-console.log("1a als Wortzeichen gehasht:");
+console.log("Hashing '1a' as a word character:");
 console.log(crypto.createHash('RSA-SHA256').update('1a', 'utf8').digest('hex'));
 console.log("");
 
-//Aufgabe 3.1
-console.log("1a als hexadezimaler Wert gehasht");
+console.log("Hashing '1a' as a hexadecimal value:");
 console.log(crypto.createHash('RSA-SHA256').update('1a', 'utf8').digest('hex'));
 console.log("");
