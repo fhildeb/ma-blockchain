@@ -25,7 +25,7 @@
 
       window.addEventListener("load", (event) => {
         if (window.ethereum) {
-          contractAddress = "0x1e3dc8543E977d1b995aE850132Fb979873E8e15"; //TODO: Write Contract Goerli
+          contractAddress = "0x745ccB94d6e32361882198526F09A3Fb61EE3E0D"; //TODO: Write Contract Goerli
           sender = "0x87E01F75d7aC18D6afeBA63192B6CBeB391a57A8"; //TODO: Account Address
           ethereum
             .request({ method: "eth_requestAccounts" })
@@ -36,12 +36,43 @@
               var abi = [
                 {
                   inputs: [],
+                  stateMutability: "nonpayable",
+                  type: "constructor",
+                },
+                {
+                  inputs: [
+                    {
+                      internalType: "string",
+                      name: "_text",
+                      type: "string",
+                    },
+                  ],
+                  name: "writeText",
+                  outputs: [],
+                  stateMutability: "payable",
+                  type: "function",
+                },
+                {
+                  inputs: [],
                   name: "counter",
                   outputs: [
                     {
                       internalType: "uint256",
                       name: "",
                       type: "uint256",
+                    },
+                  ],
+                  stateMutability: "view",
+                  type: "function",
+                },
+                {
+                  inputs: [],
+                  name: "owner",
+                  outputs: [
+                    {
+                      internalType: "address payable",
+                      name: "",
+                      type: "address",
                     },
                   ],
                   stateMutability: "view",
@@ -73,19 +104,6 @@
                   stateMutability: "view",
                   type: "function",
                 },
-                {
-                  inputs: [
-                    {
-                      internalType: "string",
-                      name: "_text",
-                      type: "string",
-                    },
-                  ],
-                  name: "writeText",
-                  outputs: [],
-                  stateMutability: "payable",
-                  type: "function",
-                },
               ];
 
               document
@@ -98,8 +116,13 @@
                   // Create a contract object. For this you need the ABI and the contract address
 
                   contract.methods
-                    .writeText("Hello")
-                    .send({ from: sender })
+                    .writeText(document.getElementById("text").value)
+                    .send({
+                      from: sender,
+                      value: web3.utils.toWei("0.00001", "ether"), // Convert 10000 wei to ether
+                      gas: 200000,
+                      gasPrice: web3.utils.toWei("20", "gwei"),
+                    })
                     .then(function (res) {
                       // Calling the "writeText" contract method
                       var transaction = res.transactionHash;
