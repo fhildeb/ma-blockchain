@@ -2,8 +2,6 @@
 
 MA Blockchain Course from the University of Applied Science Mittweida that took place in 2020.
 
-> **NOTE**: The commentary and filenames might appear in German.
-
 ## Course Contents
 
 This blockchain course provided an in-depth understanding of the fundamental concepts, technologies, and applications of cryptocurrencies, with a focus on Bitcoin and Ethereum. It featured valuable insights into the decentralized nature of blockchain technology, the process of mining, and the role of cryptographic hash functions. The course also explored the broader cryptocurrency ecosystem, including alternative mining puzzles, altcoins, and the use of blockchain as a platform.
@@ -36,6 +34,8 @@ This blockchain course provided an in-depth understanding of the fundamental con
 - Introduction to decentralized finance within the blockchain ecosystem
 
 ## Repository Contents
+
+> The course included 13 practical sessions to solve mathematical puzzles and build projects, 8 featuring actual code to share within a repository.
 
 5. Hashing Script
 6. Address Balance Search
