@@ -78,14 +78,14 @@
                   var contract = new web3.eth.Contract(
                     abi,
                     "0x4e8928C63d471702d593B0107FCdC48D31764138"
-                  ); //TODO: Add Contract Goerli
+                  ); // Add Contract Goerli
 
                   //Goerli
                   contract.methods
                     .adding(number1, number2)
                     .send({
                       from: "0x87E01F75d7aC18D6afeBA63192B6CBeB391a57A8",
-                      // TODO: Account Address
+                      // Account Address
                     })
                     .then(function (res) {
                       var transaction = res.transactionHash;

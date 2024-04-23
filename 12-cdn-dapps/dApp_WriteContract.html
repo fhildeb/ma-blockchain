@@ -25,8 +25,8 @@
 
       window.addEventListener("load", (event) => {
         if (window.ethereum) {
-          contractAddress = "0x745ccB94d6e32361882198526F09A3Fb61EE3E0D"; //TODO: Write Contract Goerli
-          sender = "0x87E01F75d7aC18D6afeBA63192B6CBeB391a57A8"; //TODO: Account Address
+          contractAddress = "0x745ccB94d6e32361882198526F09A3Fb61EE3E0D"; // Write Contract Goerli
+          sender = "0x87E01F75d7aC18D6afeBA63192B6CBeB391a57A8"; // Account Address
           ethereum
             .request({ method: "eth_requestAccounts" })
             .then(function (res) {
