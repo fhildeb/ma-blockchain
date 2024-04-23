@@ -1,10 +1,10 @@
 //npm install web3
 
 //Web3 Library
-Web3JS = require("web3");
+const Web3JS = require("web3");
 
 //Address
-web3 = new Web3JS("https://goerli.infura.io/v3/<infura-key>");
+const web3 = new Web3JS("https://goerli.infura.io/v3/<infura-key>");
 
 /*
 Declare asynchronous functions so that
@@ -14,7 +14,7 @@ the blockchain has been retrieved
 
 //Output block number
 async function getBlockNumber() {
-  number = await web3.eth.getBlockNumber();
+  const number = await web3.eth.getBlockNumber();
   console.log("Current block number:");
   console.log(number);
   console.log("");
@@ -22,7 +22,7 @@ async function getBlockNumber() {
 
 //Output client version
 async function getClientVersion() {
-  client = await web3.eth.getNodeInfo();
+  const client = await web3.eth.getNodeInfo();
   console.log("Client version:");
   console.log(client);
   console.log("");
@@ -30,7 +30,7 @@ async function getClientVersion() {
 
 //Get network ID
 async function getNetwork() {
-  net = await web3.eth.net.getId();
+  const net = await web3.eth.net.getId();
   console.log("Connected network     :  " + net);
   console.log("-----------Agenda------------");
   console.log("Mainnet              = ID:  1");
@@ -43,7 +43,7 @@ async function getNetwork() {
 
 //Get current gas price
 async function getGasPrice() {
-  price = await web3.eth.getGasPrice();
+  const price = await web3.eth.getGasPrice();
   console.log("Current gas price in Wei:");
   console.log(price);
   console.log("");
@@ -51,7 +51,7 @@ async function getGasPrice() {
 
 //Get block 1
 async function getGenesisHash() {
-  genesis = await web3.eth.getBlock("genesis");
+  const genesis = await web3.eth.getBlock("genesis");
   console.log("Genesis Block Hash:");
   console.log(genesis.hash);
   console.log("");
@@ -59,7 +59,7 @@ async function getGenesisHash() {
 
 //Get current gas limit in block
 async function getGasLimit() {
-  block = await web3.eth.getBlock("latest");
+  const block = await web3.eth.getBlock("latest");
   console.log("Current gas limit of the last block:");
   console.log(block.gasLimit);
   console.log("");
@@ -67,7 +67,7 @@ async function getGasLimit() {
 
 //Get Ether from an address
 async function getEthFromAddress() {
-  ether = await web3.eth.getBalance(
+  const ether = await web3.eth.getBalance(
     "0x9e3d69305Da51f34eE29BfB52721e3A824d59e69"
   );
   console.log("Current balance on address");
@@ -78,7 +78,7 @@ async function getEthFromAddress() {
 
 //Get the number of transactions in a block
 async function getTxCountFromBlock() {
-  tx = await web3.eth.getBlockTransactionCount(
+  const tx = await web3.eth.getBlockTransactionCount(
     "0xaab2e5e0967efae40975e6110d92e75e15719cfa065a47825bd173d95bcc9b53"
   );
   console.log("In block ");
@@ -91,7 +91,7 @@ async function getTxCountFromBlock() {
 
 //Get transaction information
 async function getTransaction() {
-  receipt = await web3.eth.getTransaction(
+  const receipt = await web3.eth.getTransaction(
     "0x4f080a4965d74e38a05c809708724e8d596ab9576c89e55090a9e1445b743075"
   );
   console.log("In the transaction with the hash");
