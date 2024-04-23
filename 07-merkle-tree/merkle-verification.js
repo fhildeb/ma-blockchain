@@ -1,20 +1,21 @@
 // Include Merkle Tree Library
-merkle = require("merkletree");
+const merkle = require("merkletree");
 
 // Create example transactions
-trxs = ["from a to b", "from x to y", "from t to e", "from m to n"];
+const trxs = ["from a to b", "from x to y", "from t to e", "from m to n"];
 
 // Generate the tree
-tree = merkle.default(trxs);
+const tree = merkle.default(trxs);
 
 console.log("");
 console.log("Merkle Root of the created tree");
-mroot = tree.root();
+const mroot = tree.root();
 console.log(mroot);
 
 console.log("");
 console.log("Entire path of the created tree");
-console.log((mpath = tree.proof("from x to y")));
+const mpath = tree.proof("from x to y")
+console.log(mpath);
 
 console.log("");
 console.log("Checking transactions:");
